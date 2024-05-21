@@ -5,11 +5,5 @@
     ],
     "routes": [
         {"src": "/(.*)", "dest": "main.py"}
-    ],
-    "ignoreFiles": [
-        "dev_req.txt",
-        "model_testing.ipynb",
-        "rainfall.csv",
-        "src.py"
     ]
 }
