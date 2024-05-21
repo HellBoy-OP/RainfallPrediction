@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="/static/assets/css/style.css">
+    <title>Rainfall Prediction</title>
+</head>
+
+<body class="bg-[#07090F] text-white">
+    <div class="prediction">
+        <div class="flex flex-col items-center h-screen">
+            <div class="flex justify-center my-10">
+                <h1 class="text-4xl font-bold text-center text-[#83E8BA]">Rainfall Prediction</h1>
+            </div>
+            <div class="relative w-[80vw] lg:w-[50vw] h-[60%] border-4 shadow-[0_20px_50px_-10px_#77567A] border-[#77567A] rounded-xl">
+                <div class="absolute inset-0 bg-[url('image')] bg-cover bg-center rounded-lg"></div>
+                <div class="flex flex-col justify-between backdrop-blur-sm rounded-lg p-8 shadow-lg h-full">
+                    <div class="flex justify-center">
+                        <p class="text-center text-white italic">"The best thing one can do when it's raining is to let it rain."<br> — Henry Wadsworth Longfellow</p>
+                    </div>
+                    <div class="flex justify-center">
+                        <form id="prediction-form" action="/" method="post" class="flex flex-col items-center w-full">
+                            <div class="flex flex-col justify-center items-center gap-5 w-full">
+                                <div class="flex flex-col justify-center items-center gap-5 w-full sm:w-3/4 sm:flex-row">
+                                    <select id="month-field" name="month" class="w-full sm:w-1/2 p-3 border text-black font-semibold text-center rounded-md shadow-sm ring-indigo-500 border-indigo-500 sm:text-sm cursor-pointer">
+                                        <option class="w-full text-gray-600 font-semibold text-base text-center" value="0" disabled {% if month_post == 0 %}selected{% endif %}>Select Month</option>
+                                        <option class="w-full text-black font-semibold text-base text-center" value="1" {% if month_post == 1 %}selected{% endif %}>January</option>
+                                        <option class="w-full text-black font-semibold text-base text-center" value="2" {% if month_post == 2 %}selected{% endif %}>February</option>
+                                        <option class="w-full text-black font-semibold text-base text-center" value="3" {% if month_post == 3 %}selected{% endif %}>March</option>
+                                        <option class="w-full text-black font-semibold text-base text-center" value="4" {% if month_post == 4 %}selected{% endif %}>April</option>
+                                        <option class="w-full text-black font-semibold text-base text-center" value="5" {% if month_post == 5 %}selected{% endif %}>May</option>
+                                        <option class="w-full text-black font-semibold text-base text-center" value="6" {% if month_post == 6 %}selected{% endif %}>June</option>
+                                        <option class="w-full text-black font-semibold text-base text-center" value="7" {% if month_post == 7 %}selected{% endif %}>July</option>
+                                        <option class="w-full text-black font-semibold text-base text-center" value="8" {% if month_post == 8 %}selected{% endif %}>August</option>
+                                        <option class="w-full text-black font-semibold text-base text-center" value="9" {% if month_post == 9 %}selected{% endif %}>September</option>
+                                        <option class="w-full text-black font-semibold text-base text-center" value="10" {% if month_post == 10 %}selected{% endif %}>October</option>
+                                        <option class="w-full text-black font-semibold text-base text-center" value="11" {% if month_post == 11 %}selected{% endif %}>November</option>
+                                        <option class="w-full text-black font-semibold text-base text-center" value="12" {% if month_post == 12 %}selected{% endif %}>December</option>
+                                    </select>
+                                    <input id="year-field" class="w-full sm:w-1/2 p-3 border text-black font-semibold text-center rounded-md shadow-sm ring-indigo-500 border-indigo-500 sm:text-sm" type="text" name="year" placeholder="Year" autocomplete="off" value="{{ year_post if year_post else '' }}">
+                                </div>
+                                <div class="flex justify-center flex-col w-full items-center gap-5 sm:w-3/4 sm:flex-row">
+                                    <button id="submit-btn" type="submit" class="w-1/2 sm:w-24 py-[10px] bg-indigo-600 text-white rounded-lg text-base hover:bg-indigo-700 shadow-lg hover:shadow-indigo-500/50">
+                                        Predict
+                                    </button>
+                                    <button id="clear-btn" type="button" class="w-1/2 sm:w-24 py-[10px] bg-red-500 text-white rounded-lg text-base hover:bg-red-600 shadow-lg hover:shadow-red-400/50">
+                                        Clear
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="bottom-0 p-2 bg-gray-100 border border-gray-300 rounded-md text-center">
+                        <span class="text-lg font-bold text-[#392F5A]" id="message">{{result_post}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center justify-center w-full py-5">
+                <button id="team-btn" class="flex items-center text-xl font-semibold mt-3 gap-x-1 bg-[#E94F37] hover:bg-[#ff563c] focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-50 px-5 py-3 rounded-full">
+                    <span class="material-symbols-outlined">groups</span>
+                    <span>Meet the Team</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="team hidden">
+        <div class="h-screen flex items-center flex-col">
+            <div class="my-10 gap-x-8 gap-y-20">
+                <div class="flex justify-end items-center flex-col">
+                    <h2 class="text-3xl font-bold tracking-tight text-[#99E1D9] sm:text-4xl">Meet the Team</h2>
+                </div>
+            </div>
+            <div class="m-auto flex justify-center items-center flex-col gap-y-12">
+                <ul role="list" class="">
+                    <li>
+                        <div class="grid items-center flex-wrap gap-y-8 gap-x-6">
+                            <div class="text-center">
+                                <h3 class="text-2xl font-semibold leading-7 tracking-tight text-white">Anand Dubey</h3>
+                                <p class="text-lg font-semibold leading-6 text-violet-400">(21CS031002)</p>
+                            </div>
+                            <div class="text-center">
+                                <h3 class="text-2xl font-semibold leading-7 tracking-tight text-white">Sanjib Hansda
+                                </h3>
+                                <p class="text-lg font-semibold leading-6 text-violet-400">(21CS031014)</p>
+                            </div>
+                            <div class="text-center">
+                                <h3 class="text-2xl font-semibold leading-7 tracking-tight text-white">Satyam Shaw</h3>
+                                <p class="text-lg font-semibold leading-6 text-violet-400">(21CS031015)</p>
+                            </div>
+                            <div class="text-center">
+                                <h3 class="text-2xl font-semibold leading-7 tracking-tight text-white">Soudipta Mondal
+                                </h3>
+                                <p class="text-lg font-semibold leading-6 text-violet-400">(21CS031018)</p>
+                            </div>
+                            <div class="text-center">
+                                <h3 class="text-2xl font-semibold leading-7 tracking-tight text-white">Suman Das
+                                </h3>
+                                <p class="text-lg font-semibold leading-6 text-violet-400">(21CS031020)</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <button id="home-btn"
+                    class="flex items-center text-xl font-semibold mt-2 gap-x-1 bg-[#E94F37] hover:bg-[#ff563c] focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-50 px-5 py-3 rounded-full">
+                    <span class="material-symbols-outlined">home</span>
+                    <span>Home</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="footer bg-[#07090F] w-full fixed bottom-0">
+        <div class="flex justify-center items-center text-center">
+            <p class="text-base font-semibold text-gray-500">
+                Copyright &copy; <span class="copyright-year"></span>
+                <a class="text-orange-400/90" href="https://github.com/The-Hellbot">HellBot Org.</a> | All rights reserved!
+            </p>
+        </div>
+    </div>
+    <script src="/static/assets/js/script.js"></script>
+</body>
+
+</html>
