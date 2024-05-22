@@ -1,7 +1,7 @@
-import pickle
-
 import numpy as np
 import pandas as pd
+from skl2onnx import convert_sklearn
+from skl2onnx.common.data_types import FloatTensorType
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 
@@ -17,7 +17,21 @@ data[numeric_cols] = data[numeric_cols].fillna(means)
 
 # group the data by SUBDIVISION
 group = data.groupby("SUBDIVISION")[
-    ["YEAR", "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
+    [
+        "YEAR",
+        "JAN",
+        "FEB",
+        "MAR",
+        "APR",
+        "MAY",
+        "JUN",
+        "JUL",
+        "AUG",
+        "SEP",
+        "OCT",
+        "NOV",
+        "DEC",
+    ]
 ]
 
 # subdivisions = data["SUBDIVISION"].unique().tolist()
@@ -69,6 +83,8 @@ random_forest_model = RandomForestRegressor(
 random_forest_model.fit(X_train, y_train)
 
 # save the model
-file = open("model.pkl", "wb")
-pickle.dump(random_forest_model, file)
-file.close()
+initial_type = [("float_input", FloatTensorType([None, X_train.shape[1]]))]
+onnx_model = convert_sklearn(random_forest_model, initial_types=initial_type)
+
+with open("model.onnx", "wb") as f:
+    f.write(onnx_model.SerializeToString())
