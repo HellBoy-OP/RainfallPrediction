@@ -26,7 +26,7 @@ def home():
 
         if not year or not month:
             return render_template(
-                "index.html", month_post=0, result_post="Enter a valid date to get prediction.",
+                "index.html", month_post=0, result_post="not a valid date!",
             )
 
         try:
@@ -34,12 +34,12 @@ def home():
             month = int(month)
         except ValueError:
             return render_template(
-                "index.html", month_post=0, result_post="Enter a valid date to get prediction.",
+                "index.html", month_post=0, result_post="not a valid date!",
             )
 
         if not is_valid_date(year, month):
             return render_template(
-                "index.html", month_post=0, result_post="Enter a valid date to get prediction.",
+                "index.html", month_post=0, result_post="not a valid date!",
             )
 
         input_name = session.get_inputs()[0].name
@@ -49,7 +49,7 @@ def home():
         pred_onx = session.run([label_name], {input_name: data})[0]
 
         res = str(round(pred_onx[0, 0], 2))
-        result = f"The rainfall prediction is {res} mm."
+        result = f"{res} mm"
 
         return render_template(
             "index.html", month_post=month, year_post=year, result_post=result
