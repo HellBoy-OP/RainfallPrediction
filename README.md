@@ -18,7 +18,7 @@
     - To create the model run `python3 src.py`
 
 - ## Deploy Flask App:
-    - Before deploying make sure that `model.pkl` is present in root directory.
+    - Before deploying make sure that `model.onnx` is present in root directory.
     - Now deploy the flask app using `main.py`
 
 <!---
