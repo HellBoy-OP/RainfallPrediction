@@ -21,10 +21,12 @@
     - Before deploying make sure that `model.pkl` is present in root directory.
     - Now deploy the flask app using `main.py`
 
+<!---
 - ## Team:
     - Anand Dubey
     - Suman Das
     - Sanjib Hansda
     - Soudipta Modal
     - Satyam Shaw
+--->
 
