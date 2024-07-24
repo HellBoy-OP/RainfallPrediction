@@ -1,25 +1,49 @@
 # Rainfall Prediction System
-    Using Machine Learning (Python)
+> Using Machine Learning (Python)
 
-- ## Dataset:
-  Monthly rainfall data of Indian State and UT from year 1901 to 2015.
+This project showcases the integration of machine learning with modern web technologies to address real-world challenges effectively.
 
-- ## Models:
-    - [ ] Linear Regression Model
-    - [ ] Lasso Model
-    - [ ] Ridge Model
-    - [ ] SVM Model
-    - [x] Random Forest Model
+# Technologies Used:
+- Frontend:
+  > JavaScipt, HTML, Tailwind CSS
 
-      > We will be using Random Forest Model for this project.
+- Backend & ML Model:
+  > Python (Flask, numpy, skikit-learn, matplotlib)
 
-- ## Create Model:
-    - Install requirements from `requirements.txt` & `dev_req.txt`
-    - To create the model run `python3 src.py`
+## Objective
+> The primary aim of this project is to accurately predict rainfall using historical data spanning from 1901 to 2015. By leveraging this extensive dataset, the model can provide valuable insights and predictions for rainfall patterns, which can be crucial for agricultural planning, water resource management, and disaster preparedness.
 
-- ## Deploy Flask App:
-    - Before deploying make sure that `model.onnx` is present in root directory.
-    - Now deploy the flask app using `main.py`
+## Key Features
+- Utilizes a comprehensive dataset for accurate predictions
+- Interactive and user-friendly frontend interface
+- Robust and efficient backend processing
+
+## Dataset:
+> Monthly rainfall data of Indian State and UT from year 1901 to 2015.
+
+## Models:
+- [ ] Linear Regression Model
+- [ ] Lasso Model
+- [ ] Ridge Model
+- [ ] SVM Model
+- [x] Random Forest Model
+
+  > We will be using Random Forest Model for this project.
+
+## Create Model:
+- Install requirements from `requirements.txt`
+
+      pip3 install -r requirements.txt
+
+- Create the model
+
+      python3 src.py
+
+## Deploy Flask App:
+- Before deploying make sure that `model.onnx` is present in root directory.
+- Now deploy the flask app.
+ 
+      python3 main.py
 
 <!---
 - ## Team:
